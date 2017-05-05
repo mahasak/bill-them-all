@@ -2,6 +2,14 @@
   <div id="app">
     <h1>{{title}}</h1>
   </div>
+  <div class="bill-items">
+    <div v-for="item in items">
+    {{item.name}} {{item.price}}
+    </div>
+    <ul>
+      <li ></li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -11,6 +19,12 @@ export default {
     return {
       title: "Bill-Them-All",
       msg: 'Welcome to Bill-ThemAll'
+      items: [
+        {
+          name: "Item 1",
+          price: 100.00
+        }
+      ]
     }
   }
 }
