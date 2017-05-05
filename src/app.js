@@ -28,14 +28,11 @@ var app = new Vue({
   },
   watch: {
     billItems: function(val) {
-      console.log((this.getTotal() * 1.1))
-      console.log((this.getTotal()* 1.1) * 0.07)
       this.summaryPrice = parseFloat((this.getTotal() * 1.1) + ((this.getTotal()* 1.1) * 0.07)).toFixed(2)
       var total = this.getTotal()
       var tmp = this.billItems.map((x)=>{
-        x.pay = x.price * this.summaryPrice / total
+        x.pay = parseFloat(x.price * this.summaryPrice / total).toFixed(2)
       })
-      console.log(tmp)
     }
   },
   methods: {
@@ -51,9 +48,7 @@ var app = new Vue({
     getTotal: function() {
       if (this.billItems.length <= 0) return 0
       if (this.billItems.length == 1) return parseFloat(this.billItems[0].price)
-      //console.log(this.billItems)
       var tmp = this.billItems.reduce((a,b) => { return {price: parseFloat(a.price) + parseFloat(b.price)} })
-      console.log(tmp.price)
       return tmp.price
     },
   }
