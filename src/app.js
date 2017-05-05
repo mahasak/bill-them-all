@@ -14,36 +14,46 @@ var app = new Vue({
   },
   computed: {
     totalPrice: function() {
-      return this.getTotal()
+      return parseFloat(this.getTotal()).toFixed(2)
     },
     vatPrice: function() {
-      return (this.getTotal()* 1.1) * 0.07
+      return parseFloat((this.getTotal()* 1.1) * 0.07).toFixed(2)
     },
     servicePrice: function() {
-      return this.getTotal() * 0.1
+      return parseFloat(this.getTotal() * 0.1).toFixed(2)
     },
     summaryPrice2: function() {
-      return this.getTotal() * 1.17
+      return parseFloat(this.getTotal() * 1.17).toFixed(2)
     }
   },
   watch: {
     billItems: function(val) {
-      this.summaryPrice = (this.getTotal() * 1.1) + ((this.getTotal()* 1.1) * 0.07)
+      console.log((this.getTotal() * 1.1))
+      console.log((this.getTotal()* 1.1) * 0.07)
+      this.summaryPrice = parseFloat((this.getTotal() * 1.1) + ((this.getTotal()* 1.1) * 0.07)).toFixed(2)
+      var total = this.getTotal()
+      var tmp = this.billItems.map((x)=>{
+        x.pay = x.price * this.summaryPrice / total
+      })
+      console.log(tmp)
     }
   },
   methods: {
     add: function() {
       var data = {
         name: document.getElementById("name").value,
-        price: document.getElementById("price").value
+        price: document.getElementById("price").value,
+        pay: document.getElementById("price").value
       }
       this.billItems.push(data)
       document.getElementById("addbill").reset();
     },
     getTotal: function() {
       if (this.billItems.length <= 0) return 0
-      if (this.billItems.length == 1) return this.billItems[0].price
-      var tmp = this.billItems.reduce((a,b) => { return {price: a.price + b.price} })
+      if (this.billItems.length == 1) return parseFloat(this.billItems[0].price)
+      //console.log(this.billItems)
+      var tmp = this.billItems.reduce((a,b) => { return {price: parseFloat(a.price) + parseFloat(b.price)} })
+      console.log(tmp.price)
       return tmp.price
     },
   }

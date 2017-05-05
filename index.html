@@ -12,7 +12,6 @@
       background: #fff;
       border-radius: 2px;
       margin: 16px;
-      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
     }
 
     .title {
@@ -53,31 +52,7 @@
           </div>
         </form>
 
-
-        <ul class="collection with-header" >
-          <li class="collection-header"><b>Bill Items</b></li>
-          <li class="collection-item" v-for="item in billItems">
-            <div>{{item.name}}<a href="#!" class="secondary-content">{{item.price}} Baht</a></div>
-          </li>
-        </ul>
-
-        <ul class="collection with-header" >
-          <li class="collection-header"><b>Bill Summary</b> <a href="#!" class="secondary-content">{{ summaryPrice }} Baht</a></li>
-          <li class="collection-item">
-            <div>Total<a href="#!" class="secondary-content">{{ totalPrice }} Baht</a></div>
-          </li>
-          <li class="collection-item">
-            <div>Service Charge<a href="#!" class="secondary-content">{{ servicePrice }} Baht</a></div>
-          </li>
-          <li class="collection-item">
-            <div>VAT<a href="#!" class="secondary-content">{{ vatPrice }} Baht</a></div>
-          </li>
-        </ul>
-
-      </div>
-      
-      <input id="Summary" placeholder="How much we need to pay" v-model="summaryPrice" />
-      <div class="row">
+        <div class="row">
         
         <div class="col s6">
           <div class="switch">
@@ -102,6 +77,36 @@
         </div>
         
       </div>
+
+
+        <ul class="collection with-header" >
+          <li class="collection-header"><b>Bill Items</b></li>
+          <li class="collection-item avatar" v-for="item in billItems">
+            <i class="material-icons circle">folder</i>
+            <span class="title">{{item.name}}</span>
+            <p>Amount {{item.price}} Baht <br>
+              Pay {{item.pay}} Baht
+            </p>
+            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+          </li>
+        </ul>
+
+        <ul class="collection with-header" >
+          <li class="collection-header"><b>Bill Summary</b> <a href="#!" class="secondary-content">{{ summaryPrice }} Baht</a></li>
+          <li class="collection-item">
+            <div>Total<a href="#!" class="secondary-content">{{ totalPrice }} Baht</a></div>
+          </li>
+          <li class="collection-item">
+            <div>Service Charge<a href="#!" class="secondary-content">{{ servicePrice }} Baht</a></div>
+          </li>
+          <li class="collection-item">
+            <div>VAT<a href="#!" class="secondary-content">{{ vatPrice }} Baht</a></div>
+          </li>
+        </ul>
+
+      </div>
+      
+      
     </div>
 
 
